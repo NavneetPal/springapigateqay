@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: springapigateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+        - id: interview-service
+          uri: lb://INTERVIEWPREP
+          predicates:
+            - Path=/employee/**,/user/**
+        - id: microservice
+          uri: lb://MICROSERVICEAPP
+          predicates:
+              - Path=/ms/**
+server:
+  port: 8082
+
+
